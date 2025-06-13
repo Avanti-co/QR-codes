@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quick Shopline</title>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-uoeW0UXG89WFL5emEyH3usN9lHBC3vKzX0N6LE2W0DZyK+P7tkkCkzTNYyZ8+E4oVFVbA+lcf7+bR3IOXxjEOg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    :root {
+      --gold: #b38818;
+      --dark: #1c1c1c;
+      --light: #f9f9f9;
+      --white: #ffffff;
+      --font: 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background-color: var(--light);
+      color: var(--dark);
+    }
+
+    header {
+      text-align: center;
+    }
+
+    header img {
+      width: 100%;
+      max-height: 280px;
+      object-fit: cover;
+      border-bottom: 4px solid var(--gold);
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 16px;
+    }
+
+    .section {
+      padding: 18px 16px;
+      background: var(--white);
+      margin: 14px 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .section h1 {
+      font-size: 1.4rem;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .section p {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--gold);
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      margin-top: 16px;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #8c6c13;
+    }
+
+    .btn-wrapper {
+      text-align: center;
+    }
+
+    .contact-info {
+      margin-top: 10px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      font-size: 0.95rem;
+      margin: 10px 0;
+    }
+
+    .contact-item i {
+      margin-right: 10px;
+      color: var(--gold);
+      width: 20px;
+      text-align: center;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    @media screen and (max-width: 600px) {
+      .section h1 {
+        font-size: 1.2rem;
+      }
+
+      .btn {
+        width: 100%;
+        font-size: 1rem;
+      }
+
+      .btn-wrapper {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="QSL.jpeg">
+  </header>
+
+  <div class="container">
+
+    <div class="section">
+      <h1>About Quick Shopline</h1>
+      <p>
+        Quick Shopline is your all-in-one source for reliable and fast shopping services. We deliver quality with speed and professionalism.
+      </p>
+      <div class="btn-wrapper">
+        <a class="btn" href="https://www.facebook.com/profile.php?id=61576585056040&mibextid=LQQJ4d" target="_blank">
+          <i class="fab fa-facebook"></i> Visit Facebook
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h1>Contact Us</h1>
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <a href="tel:+1234567890">+123 456 7890</a>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <a href="mailto:support@quickshopline.com">support@quickshopline.com</a>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          123 Market Street, Commerce City
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
