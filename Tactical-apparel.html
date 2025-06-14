@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://kit.fontawesome.com/419bf59dd3.js" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tactical apparel</title>
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <style>
+    :root {
+      --gold: #d4af37;
+      --dark: #000000;
+      --light: #ffffff;
+      --font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background-color: var(--dark);
+      color: var(--light);
+    }
+
+    header img {
+      width: 100%;
+      max-height: 280px;
+      object-fit: cover;
+      border-bottom: 4px solid var(--gold);
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 16px;
+    }
+
+    .ceo-highlight {
+      display: block;
+      border: 2px solid var(--gold);
+      padding: 14px;
+      margin: 16px;
+      text-align: center;
+      border-radius: 10px;
+      background: #1a1a1a;
+      font-weight: bold;
+      color: var(--gold);
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .ceo-highlight:hover {
+      background-color: #2a2a2a;
+    }
+
+    .section {
+      padding: 18px 16px;
+      background: #111;
+      margin: 14px 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(255,255,255,0.05);
+    }
+
+    .section h1 {
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .section p {
+      font-size: 1rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .btn-wrapper {
+      text-align: center;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--gold);
+      color: var(--dark);
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      margin-top: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #b8912c;
+    }
+
+    .contact-info {
+      margin-top: 20px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      margin: 12px 0;
+    }
+
+    .contact-item i {
+      margin-right: 12px;
+      color: var(--gold);
+      min-width: 22px;
+      text-align: center;
+    }
+
+    a {
+      color: var(--light);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media screen and (max-width: 600px) {
+      .section h1 {
+        font-size: 1.3rem;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .section p {
+        text-align: left;
+      }
+
+      .ceo-highlight {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="ROB.jpeg">
+  </header>
+
+  <!-- CEO clickable -->
+  <a class="ceo-highlight" href="https://linktr.ee/robb_supplies?utm_source=qr_code" target="_blank">
+    CEO: ROBB_SUPPLIES
+  </a>
+
+  <div class="container">
+
+    <div class="section">
+      <h1>About Tactical Apparel</h1>
+      <p>
+        Tactical Apparel_zm is your trusted source for fast and reliable shopping services. We focus on speed, quality, and professional customer service.
+      </p>
+      <div class="btn-wrapper">
+        <a class="btn" href="https://www.facebook.com/profile.php?id=61576585056040&mibextid=LQQJ4d" target="_blank">
+          <i class="fab fa-facebook"></i> Visit Facebook
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h1>Contact Us</h1>
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <a href="tel:+260979126999">+260 97 9126999</a>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-globe"></i>
+          <a href="https://linktr.ee/robb_supplies?utm_source=qr_code"> Robb Supplies_zm </a>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          Kamwala Market
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
