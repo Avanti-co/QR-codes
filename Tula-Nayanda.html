@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tula M. Nayanda Nakasamu - Business Card</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+        * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #e8f5e9, #f3fff6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      
+    }
+
+    /* Splash Screen */
+    #splash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      animation: fadeOut 1s ease-in-out 2s forwards;
+    }
+
+    #splash img {
+      height: 100px;
+      opacity: 0;
+      transform: scale(0.7);
+      animation: logoAnim 1.5s ease-in-out forwards;
+    }
+
+    @keyframes logoAnim {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    .business-card {
+      display: none;
+      flex-direction: row;
+      max-width: 960px;
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      transition: 0.3s ease;
+    }
+
+    .business-card.show {
+      display: flex;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .left, .right {
+      padding: 36px;
+      flex: 1;
+    }
+
+    .left {
+      background: linear-gradient(135deg, #1b5e20, #388e3c);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .left h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .position {
+      font-size: 16px;
+      font-weight: 500;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .slogan {
+      font-size: 14px;
+      font-style: italic;
+      margin-top: 30px;
+      opacity: 0.85;
+    }
+
+    .right {
+      background: linear-gradient(to bottom right, #ffffff, #f9fdfb);
+      color: #333;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .logo img {
+      height: 70px;
+    }
+
+    .logo h3 {
+      font-size: 18px;
+      margin: 0;
+      font-weight: 600;
+      color: #1b5e20;
+    }
+
+    .right p {
+      margin: 12px 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .right p strong {
+      color: #2e7d32;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    a {
+      color: #1b5e20;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: #33691e;
+      text-decoration: underline;
+    }
+
+    i {
+      color: #1b5e20;
+    }
+
+    /* Responsive Layout */
+    @media (max-width: 768px) {
+      .business-card {
+        flex-direction: column;
+      }
+
+      .left {
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .logo {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .left h2 {
+        font-size: 18px;
+      }
+
+      .position,
+      .right p {
+        font-size: 13px;
+      }
+
+      .slogan {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Splash Screen -->
+  <div id="splash">
+    <img src="https://cdn.greatzambiajobs.com/jsjobsdata/data/employer/comp_6704/logo/zanl.jpeg" alt="Zambia Emblem">
+  </div>
+
+  <!-- Business Card -->
+  <div class="business-card" id="profileCard">
+    <div class="left">
+      <div>
+        <h2><i class="fas fa-user"></i> Tula M. Nayanda Nakasamu</h2>
+        <p class="position"><i class="fas fa-briefcase"></i> Accountant</p>
+      </div>
+      <p class="slogan">"Working towards an indigenous legal system"</p>
+    </div>
+    <div class="right">
+      <div class="logo">
+        <img src="https://cdn.greatzambiajobs.com/jsjobsdata/data/employer/comp_6704/logo/zanl.jpeg" alt="Zambia Emblem">
+        <h3><i class="fas fa-landmark"></i> Zambia Law Development Commission</h3>
+      </div>
+
+      <p>
+        <strong><i class="fas fa-map-marker-alt"></i> Address:</strong>
+        Plot 26F Cheetah Road, Kabulonga<br>
+        P.O. Box 34370
+      </p>
+
+      <p>
+        <strong><i class="fas fa-phone-alt"></i> Phones:</strong>
+        +260 976 758 048
+      </p>
+
+      <p>
+        <strong><i class="fas fa-envelope"></i> Emails:</strong>
+        <a href="mailto:tnayanda@yahoo.com"><i class="far fa-envelope"></i> tnayanda@yahoo.com</a><br>
+        <a href="mailto:zambialawdevelopmentcommission@gmail.com">zambialawdevelopmentcommission@gmail.com</a><br>
+        <a href="mailto:info@zambialawdevelopment.org">info@zambialawdevelopment.org</a>
+      </p>
+
+      <p>
+        <strong><i class="fas fa-hashtag"></i> Socials & Web:</strong>
+        <i class="fab fa-facebook"></i> Zambia Law Development Commission<br>
+        <i class="fab fa-twitter"></i> @zambia_law<br>
+        <i class="fas fa-globe"></i> <a href="http://www.zambialawdevelopment.org" target="_blank">www.zambialawdevelopment.org</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('profileCard').classList.add('show');
+      }, 2200);
+    });
+  </script>
+</body>
+</html>
