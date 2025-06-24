@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hope M. Ndhlovu-Chanda - Director</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #e8f5e9, #f1fdf4);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 0;
+      flex-direction: column;
+    }
+
+    /* Splash Screen */
+    #splash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      animation: fadeOut 1s ease-in-out 2s forwards;
+    }
+
+    #splash img {
+      height: 100px;
+      opacity: 0;
+      transform: scale(0.7);
+      animation: logoAnim 1.5s ease-in-out forwards;
+    }
+
+    @keyframes logoAnim {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+ .photo-header {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-bottom: 4px solid #1b5e20;
+position: relative;
+z-index: 1000;
+}
+
+
+    .photo-header img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+    }
+
+ .business-card {
+
+  display: none;
+  width: 100%;
+  max-width: 900px;
+  margin: 40px auto; /* Removed negative margin */
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  padding: 36px;
+  animation: fadeIn 0.8s ease-in-out;
+
+}
+
+
+    .business-card.show {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .logo img {
+      height: 70px;
+    }
+
+    .logo h3 {
+      font-size: 18px;
+      margin: 0;
+      font-weight: 600;
+      color: #1b5e20;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #1b5e20;
+    }
+
+    .position {
+      font-size: 16px;
+      font-weight: 500;
+      opacity: 0.9;
+      margin-bottom: 20px;
+      color: #444;
+    }
+
+    p {
+      margin: 12px 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    p strong {
+      color: #1b5e20;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    a {
+      color: #1b5e20;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: #2e7d32;
+      text-decoration: underline;
+    }
+
+    i {
+      color: #1b5e20;
+    }
+
+    @media (max-width: 768px) {
+      .business-card {
+        padding: 24px;
+        margin-top: -30px;
+      }
+
+      .photo-header {
+        height: 240px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      .position,
+      p {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Splash Screen -->
+  <div id="splash">
+    <img src="https://cdn.greatzambiajobs.com/jsjobsdata/data/employer/comp_6704/logo/zanl.jpeg" alt="Zambia Emblem">
+  </div>
+
+  <!-- Full-Width Photo Header -->
+  <div class="photo-header">
+    <img src="hope.jpeg" alt="Director Profile Photo">
+  </div>
+
+  <!-- Business Card Info -->
+  <div style=" padding-top: 60px;"class="business-card" id="profileCard">
+    <div class="logo">
+      <img src="https://cdn.greatzambiajobs.com/jsjobsdata/data/employer/comp_6704/logo/zanl.jpeg" alt="Zambia Law Development Commission">
+      <h3><i class="fas fa-landmark"></i> Zambia Law Development Commission</h3>
+    </div>
+
+    <h2>Hope M. Ndhlovu-Chanda</h2>
+    <p class="position"><i class="fas fa-briefcase"></i> Director</p>
+
+    <p>
+      <strong><i class="fas fa-map-marker-alt"></i> Address:</strong>
+      Plot No. 26F, Cheetah Road, Kabulonga, Lusaka<br>
+      P.O. Box 34670
+    </p>
+
+    <p>
+      <strong><i class="fas fa-phone-alt"></i> Tel:</strong>
+      +260 211 261 976 / 264 654
+    </p>
+
+    <p>
+      <strong><i class="fas fa-phone-alt"></i> Fax:</strong>
+      +260 211 260 290
+    </p>
+
+    <p>
+      <strong><i class="fas fa-mobile-alt"></i> Cell:</strong>
+      <a>+260 966 887 048</a> /<a> +260 955 887 716</a>
+    </p>
+
+    <p>
+      <strong><i class="fas fa-envelope"></i> Emails:</strong>
+      <a href="mailto:zldc@coppernet.zm">zldc@coppernet.zm</a><br>
+      <a href="mailto:hope4lawz@gmail.com">hope4lawz@gmail.com</a>
+    </p>
+
+    <p>
+      <strong> Socials:</strong>
+      <a href="http://www.zldc.org.zm" target="_blank"> <i class="fas fa-globe"></i> www.zldc.org.zm</a><br>
+<a href="http://www.x.com/hope_chanda" target="_blank"> <i class="fa-brands fa-x-twitter"></i> @ hope_chanda</a>
+    </p>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('profileCard').classList.add('show');
+      }, 2200);
+    });
+  </script>
+</body>
+</html>
