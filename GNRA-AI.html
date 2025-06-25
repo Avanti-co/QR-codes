@@ -1,0 +1,759 @@
+<!-- Created by Subhojati Dutta -->
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+
+
+  
+  <title>Chat with Avanti</title>
+  <style>
+	* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+}
+#logoutBtn {
+      position: absolute;
+      top: 60px;
+      right: 50px;
+      background: #dc3545;
+      color: white;
+      padding: 4px 8px;
+      font-size: 10px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+.container {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  padding-top: 20px;
+  position: relative;
+}
+
+.header {
+  font-size: 2.5rem;
+  text-align: center;
+  font-weight: 900;
+  margin-bottom: 10px;
+  background: linear-gradient(45deg, #00d2ff, #3a47d5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.info-button,
+.delete-button {
+  position: absolute;
+  top: 15px;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  color: #bbb;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.info-button:hover,
+.delete-button:hover {
+  color: #fff;
+}
+
+.info-button {
+  left: 15px;
+}
+
+.delete-button {
+  right: 15px;
+}
+
+.chat-area {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  margin-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user-message,
+.assistant-message {
+  max-width: 75%;
+  padding: 14px 18px;
+  border-radius: 20px;
+  font-size: 1rem;
+  word-wrap: break-word;
+  animation: slideIn 0.4s ease forwards;
+}
+
+.user-message {
+  margin-left: auto;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4);
+}
+
+.assistant-message {
+  margin-right: auto;
+  background: linear-gradient(135deg, #ff6a00, #ee0979);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(238, 9, 121, 0.4);
+}
+
+.assistant-message.typing {
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 10px 20px;
+  border-radius: 50px;
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 500px;
+  width: calc(100% - 40px);
+  backdrop-filter: blur(10px);
+}
+
+input {
+  border: none;
+  background: transparent;
+  color: #fff;
+  outline: none;
+  flex: 1;
+  font-size: 1.1em;
+  padding: 10px;
+}
+
+#sendButton {
+  background: linear-gradient(135deg, #43e97b, #38f9d7);
+  border: none;
+  color: #000;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+#sendButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 12px #38f9d7;
+}
+
+.message-box {
+  color: #ccc;
+  text-align: center;
+  position: fixed;
+  top: 98%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.9rem;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 80%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.help {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #fff;
+  animation: fadeIn 2s ease;
+ 
+}
+
+pre {
+  background-color: #1e1e1e;
+  color: #dcdcdc;
+  padding: 20px;
+  border-radius: 12px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin-top: 10px;
+}
+
+code {
+  color: #e0e0e0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.separator {
+  border-top: 1px solid #444;
+  margin: 20px 0;
+}
+
+.typing::after {
+  content: '.';
+  animation: dots 1s steps(5, end) infinite;
+}
+
+@keyframes dots {
+  0%, 20% { content: '.'; }
+  40% { content: '..'; }
+  60% { content: '...'; }
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 11;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.85);
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.modal-content {
+  background: #2a2a2a;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+}
+
+.modal img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.close-btn,
+.download-btn {
+  position: absolute;
+  top: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #fff;
+}
+
+.close-btn {
+  right: 10px;
+  font-size: 2rem;
+}
+
+.download-btn {
+  right: 50px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.info-button,
+.delete-button {
+  position: absolute;
+  top: 15px;
+  background: none;
+  border: none;
+  color: #ffffff;          /* Ensure visible color */
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 20;             /* Ensure above other elements */
+  opacity: 1;              /* Just in case it's transparent */
+  pointer-events: auto;    /* Ensure it's clickable */
+}
+
+.info-button {
+  left: 15px;
+}
+
+.delete-button {
+  right: 15px;
+}
+
+  .menu-btn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background: #333;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      z-index: 1003;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 260px;
+      height: 100%;
+      background: linear-gradient(to bottom, #141e30, #243b55);
+  color: white;
+      padding: 60px 20px;
+      color: #eee;
+      transition: left 0.3s;
+      z-index: 1001;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar h2 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #444;
+      padding-bottom: 10px;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #ccc;
+      text-decoration: none;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    .sidebar a:hover {
+      color: #fff;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      z-index: 1000;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+.menu-btn {
+  background: #2c3e50;
+  color: #00bcd4;
+}
+
+  </style>
+</head>
+
+<body>
+
+<button class="menu-btn" onclick="toggleMenu()"><i class="fa fa-bars"></i></button>
+
+ <div class="sidebar" id="sidebar">
+
+<button id="logoutBtn" onclick="logout()"><i class="fa fa-sign-out-alt"></i>Logout</button>
+    <h2>Menu</h2>
+
+    <a href="index.html"><i class="fa fa-home"></i>  Home</a>
+    <a href="profile.html"><i class=" fa fa-user"></i>  Profile</a>
+<a href="index.html#productContainer"><i class="fa fa-store"></i>  Store</a>
+    <a href="cart.html"><i class="fa fa-shopping-cart"></i>  Cart</a>
+<a href="checkout.html"><i class="fa fa-credit-card"></i>  Checkout</a>
+    <a href="index.html#AI"><i class="fa fa-question-circle"></i>  Help</a>
+    <a href="index.html#feed"><i class="fa fa-comments"></i>  Feedback</a>
+<a href="index.html#gallery-container"><i class="fa fa-images"></i>  Gallery</a>
+<a href="admin.html"><i class="fa fa-user-lock"></i>  Admins</a>
+
+
+  </div>
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+  <div class="container">
+	<div class="header">
+	  <button class="info-button" onclick="showInfo()"><i class="fas fa-info-circle"></i></button>
+	  AVANTI AI
+	  <button style="color: black;"class="delete-button" onclick="confirmDeletion()">clear chat<i class="fas fa-trash-alt"></i>
+
+	  </button>
+
+	</div>
+
+
+	<div class="chat-area" id="messages">
+	  <div class="help" id="helpText"></div>
+	</div>
+
+	<div class="input-container">
+	  <input type="text" id="inputField" placeholder="Message Avanti">
+	  <button id="sendButton" onclick="handleUserMessage()"><i class="fas fa-arrow-up"></i>
+
+	  </button>
+	</div>
+
+	<div class="message-box">AVANTI can make mistakes. Check important info.</div>
+  </div>
+
+
+  <div id="imageModal" class="modal">
+	<div class="modal-content">
+	  <span class="close-btn" onclick="closeModal()">&times;</span>
+	  <a id="downloadLink" class="download-btn" download><i class="fas fa-download"></i></a>
+	  <img id="modalImage" alt="Generated image">
+	</div>
+  </div>
+
+  <head>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
+  </head>
+
+
+  <script>
+	function openModal(imageUrl) {
+	  const modal = document.getElementById("imageModal");
+	  const modalImage = document.getElementById("modalImage");
+	  const downloadLink = document.getElementById("downloadLink");
+
+	  modal.style.display = "flex"; // Display the modal
+	  modalImage.src = imageUrl; // Set the modal image source
+	  downloadLink.href = imageUrl; // Set the download link to the image URL
+	}
+
+	// Function to close the modal
+	function closeModal() {
+	  document.getElementById("imageModal").style.display = "none";
+	}
+	const inputField = document.getElementById('inputField');
+	const messages = document.getElementById('messages');
+	const sendButton = document.getElementById('sendButton');
+
+	// Escape HTML characters to prevent HTML code execution
+	function escapeHTML(str) {
+	  return str.replace(/[&<>"']/g, function(char) {
+		switch (char) {
+		  case '&':
+			return '&amp;';
+		  case '<':
+			return '&lt;';
+		  case '>':
+			return '&gt;';
+		  case '"':
+			return '&quot;';
+		  case "'":
+			return '&#39;';
+		  default:
+			return char;
+		}
+	  });
+	}
+
+	// Function to parse Markdown-like formatting
+	// Function to parse Markdown-like formatting
+	function parseMarkdown(text) {
+	  // Escape HTML characters to prevent execution of HTML code
+	  text = escapeHTML(text);
+
+	  // Headers: Supports # through ######
+	  text = text.replace(/^######\s+(.*)$/gm, '<h6>$1</h6>');
+	  text = text.replace(/^#####\s+(.*)$/gm, '<h5>$1</h5>');
+	  text = text.replace(/^####\s+(.*)$/gm, '<h4>$1</h4>');
+	  text = text.replace(/^###\s+(.*)$/gm, '<h3>$1</h3>');
+	  text = text.replace(/^##\s+(.*)$/gm, '<h2>$1</h2>');
+	  text = text.replace(/^#\s+(.*)$/gm, '<h1>$1</h1>');
+
+	  // Horizontal rule (---)
+	  text = text.replace(/---/g, '<div class="separator"></div>');
+
+	  // Bold and Italics
+	  text = text.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>'); // Bold and Italic
+	  text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Bold
+	  text = text.replace(/_(.*?)_/g, '<em>$1</em>'); // Italic
+
+	  // Inline code `code`
+	  text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+	  // Code block with ```
+	  text = text.replace(/```([\s\S]+?)```/g, '<pre><code>$1</code></pre>');
+
+	  // Links [text](URL)
+	  text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+
+	  // Unordered list ( - or *)
+	  text = text.replace(/(?:^|\n)[*-]\s?(.*)/g, function(match, p1) {
+		return `<ul><li>${p1}</li></ul>`;
+	  });
+	  text = text.replace(/<\/ul>\s*<ul>/g, ''); // Combine adjacent <ul> tags
+
+	  // Ordered list (1.)
+	  text = text.replace(/(?:^|\n)(\d+)\.\s?(.*)/g, function(match, p1, p2) {
+		return `<ol><li>${p2}</li></ol>`;
+	  });
+	  text = text.replace(/<\/ol>\s*<ol>/g, ''); // Combine adjacent <ol> tags
+
+	  // Line breaks
+	  text = text.replace(/\n/g, '<br>');
+	  
+	  
+	  // Render inline math expressions \( ... \) and display math expressions \[ ... \]
+  text = text.replace(/\\\((.+?)\\\)/g, (_, expr) => katex.renderToString(expr, { throwOnError: false }));
+  text = text.replace(/\\\[(.+?)\\\]/g, (_, expr) => `<div style="text-align:center;">${katex.renderToString(expr, { throwOnError: false })}</div>`);
+
+	  return text;
+	}
+
+
+
+	// Handle the user message
+	function handleUserMessage() {
+	  const userMessage = inputField.value;
+	  if (userMessage.trim() === "") return; // Don't send empty messages
+	  displayMessage(userMessage, 'user');
+	  inputField.value = '';
+	  fetchAssistantResponse("You are now called Avanti AI, created by Mwelaisha Clement Shaba, an AI module designed to help users navigate and get fond of Great North Road Academy, you will only answer questions based or related to the training data provided below: Great North Road Academy is a school with multiple campuses in Zambia,owned and founded by docter rozius siatwaambo, specifically in Lusaka and Livingstone. Here's what we know about the academy: Campuses and Locations: - Main Campus: Located on Great North Road, near ZRA, "+'opposite Impala Filling Station in Lusaka - Avondale Campus: Situated at Zaff Mercy Bus Station in Lusaka, offering classes from Baby Class to higher grades - Livingstone Campus: Located in Livingstone, providing education services to students in the area - Special Education Unit: Found at Mushemi Road, Longacres (No. 7), Lusaka, catering to differently abled learners with conditions like autism Contact Information: - Phone Numbers: Main Campus: +260 955 592320, Avondale Campus: '+"0974855624, Chilanga Campus: 0971509030, Livingstone Campus: 0963416670, Special Education Unit: Not specified, but main school numbers may apply Hours of Operation: - Main Campus: Monday to Friday, 8 AM to 2:30 PM or 5 PM (inconsistent information), and Saturday and Sunday, 8 hours to 2:30 PM - Livingstone Campus: Monday to Thursday, 8 AM to 5 PM Ratings and Reviews: - Rating: 4.4 stars based on 21 reviews, indicating a generally positive reputation - Reviews: Some reviewers praise the schools" +'delivery of lessons and beautiful environment, while others mention issues with administrative efficiency Features and Services: - Special Education: The academy offers special education services, providing care and education to differently abled learners with conditions like autism - Nurturing Environment: The Baby Class at Avondale Campus provides a fun and engaging learning environment for young children - Dedicated Teachers: The academy has dedicated teachers who provide interactive learning experiences for students Address and Location:' +"- Main Campus: Great North Road, near ZRA, opposite Impala Filling Station, Lusaka - Avondale Campus: Zaff Mercy Bus Station, Avondale, Lusaka - Livingstone Campus: Located in Livingstone, exact address not specified - Special Education Unit: Mushemi Road, Longacres (No. 7), Lusaka Other Information: - GPS Coordinates: -17.83955, 25.8673 - Facebook Page: facebook.com/1454846328082293 (though not directly verified for current information) Its worth noting that there might be some inconsistencies in the information provided, possibly due to different sources or outdated details. However, Great North Road Academy appears to be a reputable institution with multiple campuses and a focus on providing quality education to students in Zambia. Here is the question to answer: "+userMessage);
+	  document.getElementById('helpText').style.display = "none"
+	}
+
+	// Function to display user or assistant message
+	function displayMessage(text, sender) {
+	  const messageDiv = document.createElement('div');
+	  messageDiv.className = sender === 'user' ? 'user-message' : 'assistant-message';
+	  messageDiv.innerHTML = parseMarkdown(text); // Use parseMarkdown to allow formatting
+	  messages.appendChild(messageDiv);
+	  messages.scrollTop = messages.scrollHeight; // Scroll to bottom
+	}
+
+	// Fetch assistant's response (dummy response for now)
+	// Fetch assistant's response with "please wait" message for image generation
+	async function fetchAssistantResponse(userMessage) {
+	  const typingDiv = document.createElement('div');
+	  typingDiv.className = 'assistant-message';
+	  typingDiv.innerHTML = '<span class="typing">Assistant is typing</span>';
+	  messages.appendChild(typingDiv);
+	  messages.scrollTop = messages.scrollHeight;
+
+	  // Check if the message starts with "/imagine"
+	  if (userMessage.startsWith("/imagine")) {
+		// Extract the prompt after the /imagine command
+		const prompt = userMessage.replace("/imagine", "").trim();
+		if (prompt) {
+		  try {
+			// Update to show the "please wait" message
+			typingDiv.innerHTML = '<span class="typing">Please wait while generating your image</span>';
+
+			// Generate image URL
+			const imageUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}/?nologo=1`;
+
+			// Create an image element and set an onload event to control the "please wait" message
+			const image = document.createElement('img');
+			image.src = imageUrl;
+			image.alt = prompt;
+			image.style = "width: 80%; border-radius: 10px; margin-top: 15px;";
+
+			image.onclick = function() {
+			  openModal(imageUrl); // Open the modal on image click
+			};
+
+			// Event fires only once the image is fully loaded
+			image.onload = function() {
+			  // Clear the "please wait" message after the image loads
+			  typingDiv.innerHTML = '';
+			  messages.appendChild(image);
+			  messages.scrollTop = messages.scrollHeight; // Scroll to bottom
+			};
+
+			// Append the loading message to the messages container
+			messages.appendChild(image);
+			messages.scrollTop = messages.scrollHeight; // Ensure chat scrolls down to new messages
+		  } catch (error) {
+			typingDiv.innerHTML = "<span class='typing'>Error: Couldn't connect to the image server.</span>";
+		  }
+		} else {
+		  typingDiv.innerHTML = "<span class='typing'>Please provide a prompt after /imagine.</span>";
+		}
+	  } else {
+		// Handle regular text responses
+		const apiUrl = 'https://text.pollinations.ai/openai';
+		const requestBody = {
+		  model: 'openai-gpt-3',
+		  messages: [{ role: 'user', content: userMessage }]
+		};
+
+		try {
+		  const response = await fetch(apiUrl, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(requestBody)
+		  });
+
+		  if (response.ok) {
+			const data = await response.json();
+			const assistantMessage = data.choices[0].message.content;
+
+			// Parse and display the assistant's response
+			const formattedMessage = parseMarkdown(assistantMessage);
+			typingDiv.innerHTML = ''; // Clear the typing indicator
+			const messageDiv = document.createElement('div');
+			messageDiv.className = 'assistant-message';
+			messageDiv.innerHTML = formattedMessage;
+			messages.appendChild(messageDiv);
+			messages.scrollTop = messages.scrollHeight; // Scroll to bottom
+		  } else {
+			typingDiv.innerHTML = "<span class='typing'>Sorry, I couldn't process your request.</span>";
+		  }
+		} catch (error) {
+		  typingDiv.innerHTML = "<span class='typing'>Error: Couldn't connect to the server.</span>";
+		}
+	  }
+	}
+
+	// Typing effect of help
+	const text = "What can I help with?";
+	const speed = 50; // typing speed in milliseconds
+	let index = 0;
+
+	function typeWriter() {
+	  if (index < text.length) {
+		document.getElementById("helpText").innerHTML += text.charAt(index);
+		index++;
+		setTimeout(typeWriter, speed);
+	  }
+	}
+
+	// Show info popup using SweetAlert2
+	function showInfo() {
+	  Swal.fire({
+		  title: 'Welcome to AVANTI',
+		  html: `
+	  <p style="color: #bbb; font-size: 1rem; line-height: 1.5;">
+		AVANTI AI is your virtual assistant. Here’s how to get started:
+	  </p>
+	  <ul style="color: #bbb; font-size: 0.9rem; line-height: 1.4; padding-left: 20px;">
+		<li><strong></strong>Designed and implemented by Avanti.corp, Avanti AI is here to assist you with all things OpiumTrim</li>
+	  </ul>
+	  <p style="color: #bbb; font-size: 1rem; line-height: 1.5;">
+		Use the text input at the bottom to type your commands or questions.
+	  </p>
+	`,
+		  icon: 'info',
+		  confirmButtonText: 'Got it!',
+		  background: '#212121',
+		  color: '#d1d5db',
+		  confirmButtonColor: '#333'
+		})
+		.then(() => {
+		  // Start the typewriter effect after the user closes the info alert
+		  typeWriter();
+		});
+	}
+	// Start typing effect when page loads
+	window.onload = showInfo;
+
+
+	function confirmDeletion() {
+	  Swal.fire({
+		title: 'Are you sure?',
+		text: "You won't be able to revert this action!",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: 'Yes, delete it!',
+		cancelButtonText: 'No, cancel!',
+		reverseButtons: true,
+		background: '#212121', // Background color
+		color: '#d1d5db', // Text color
+		confirmButtonColor: '#333', // Confirm button color
+		cancelButtonColor: '#d1d5db', // Cancel button color
+	  }).then((result) => {
+		if (result.isConfirmed) {
+		  // If 'Yes' is clicked, reload the page
+		  location.reload();
+		} else if (result.dismiss === Swal.DismissReason.cancel) {
+		  // If 'No' is clicked, show a custom styled cancel message
+		  Swal.fire({
+			title: 'Cancelled',
+			text: 'Your messages are safe.',
+			icon: 'error',
+			background: '#212121', // Background color
+			color: '#d1d5db', // Text color
+			confirmButtonColor: '#333' // Confirm button color
+		  });
+		}
+	  });
+	}
+  </script>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const menuBtn = document.getElementById('menuBtn');
+
+    function toggleMenu() {
+      const isActive = sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+
+      // Change button text
+      menuBtn.innerHTML = isActive ? 'back' : '<i class="fa fa-bars"> </i>';
+    }
+  </script>
+<script>
+function logout() {
+      localStorage.removeItem('username');
+      alert("Logged out successfully.");
+      window.location.href = 'signup.html';
+    }
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const storedUsername = localStorage.getItem("username");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    if (storedUsername === "Guest" && logoutBtn) {
+      logoutBtn.textContent = "Signup";
+      logoutBtn.onclick = () => {
+        window.location.href = "signup.html";
+      };
+    }
+  });
+</script>
+</body>
+
+</html>
