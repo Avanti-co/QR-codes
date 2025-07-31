@@ -4,6 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Shopping Profile</title>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</script>
+
+
+  <style>
+    body { margin:0; font-family:sans-serif; background:#121212; color:#fff; }
+    header, footer { text-align:center; padding:20px; background:#1f1f1f; }
+    h1, h2 { color:#ffd700; }
+    .container { max-width:1000px; margin:auto; padding:20px; }
+    .card { background:#1e1e1e; border-radius:10px; padding:15px; margin-bottom:20px; }
+    .card img { width:100%; border-radius:10px; }
+    .movies { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
+    .movie { text-align:center; }
+    .movie img { width:100%; height:300px; object-fit:cover; border-radius:10px; }
+    .movie h3 { margin:10px 0 5px; color:#ffd700; }
+    .movie p { margin:3px 0; }
+    .swiper { width:100%; height:250px; margin-top:20px; }
+    .swiper-slide { text-align:center; }
+    .swiper-slide img { width: 150px; border-radius:10px; 
+width: 170px;
+      height: 250px;
+      object-fit: cover;
+      margin-right: 10px;
+      border-radius: 10px;
+      transition: transform 0.3s ease-in-out;
+      flex-shrink: 0; /* Prevent shrinking */
+}
+  </style>
   <style>
     body {
       margin: 0;
@@ -11,6 +40,7 @@
       background: linear-gradient(to right, #f2f2f2, #ffffff);
       color: #333;
       overflow-x: hidden;
+overflow: scroll;
     }
 
     header {
@@ -423,6 +453,70 @@
 }
 
   </style>
+
+<style>
+/* Swiper Container */
+.swiper {
+  
+
+  width: 100%;
+  height: 250px;
+  margin-top: 20px;
+  position: relative;
+  overflow: visible; /* allows side slides to show */
+}
+
+/* Swiper Slide Base */
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* Image Styling */
+.swiper-slide img {
+  width: 150px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  transform-origin: center center;
+}
+
+/* Center (Active) Slide */
+.swiper-slide-active img {
+  transform: scale(1.15) rotateY(5deg);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+  z-index: 3;
+  filter: none;
+}
+
+/* Side Slides */
+.swiper-slide-prev img,
+.swiper-slide-next img {
+  transform: scale(0.9);
+  filter: blur(2px) brightness(0.75);
+  opacity: 0.8;
+  z-index: 1;
+  box-shadow: none;
+}
+
+/* Optional: pagination dots */
+.swiper-pagination-bullet {
+  background: #888;
+  opacity: 0.6;
+  transition: background 0.3s;
+}
+.swiper-pagination-bullet-active {
+  background: #000;
+  opacity: 1;
+}
+
+</style>
 </head>
 <body>
 
@@ -434,8 +528,7 @@
   <!-- Jungle Shopping -->
   <section>
     <h2>Jungle Shopping</h2>
-    <p class="description">|  World of Variety  |</p>
-    <p class="description">Explore a wode variety of handcrafted items ranging from reeds to woodwork incoperated with nature and recylcled products, etc.</p>
+    <p class="description">Explore a wide variety of what nature has to offer - handcrafted products of wood, reeds, etc.</p>
     <div class="contact">
       <p>Call: <strong>0969 242929</strong> | Email: <a href="mailto:fsndhlovu74@gmail.com">fsndhlovu74@gmail.com</a></p>
     </div>
@@ -482,20 +575,47 @@
     </div>
 
     <div class="item-info">
-      <p><strong>Hot Picks:</strong> fruit buskets, traditionally woven Masterpieces, wooden flower pots, plants, etc.</p>
+      <p><strong>Hot Picks:</strong> fruit buskets, key buskets & traditionally woven master pieces</p>
     </div>
 
     <div class="interactive-buttons">
   <button id="viewCollectionBtn2">View Collection</button>
-    <button onclick="window.open('https://wa.me/260976668808', '_blank')">Chat on WhatsApp</button>
+    <button onclick="window.open('https://wa.me/0976668808', '_blank')">Chat on WhatsApp</button>
 
     </div>
   </section>
 
+  
+      <div class="swiper" style="height: 400px; overflow-x: hidden; overflow-y: visible;">
+        <div class="swiper-wrapper">
+          <!-- Replace with your 10 suggested movie image URLs -->
+          <div class="swiper-slide"><img src="l14.jpeg" alt="Suggested Movie 1"></div>
+<div class="swiper-slide"><img src="e8.JPG" alt="#"></div>
+
+          <div class="swiper-slide"><img src="l15.jpeg" alt="#"></div>
+<div class="swiper-slide"><img src="j4.JPG" alt="#"></div>
+          <div class="swiper-slide"><img src="l16.jpeg" alt="#"></div>
+<div class="swiper-slide"><img src="j9.JPG" alt="#"></div>
+ <div class="swiper-slide"><img src="l17.jpeg" alt="#"></div>
+<div class="swiper-slide"><img src="e2.JPG" alt="#"></div>
+ <div class="swiper-slide"><img src="l18.jpeg" alt="#"></div>
+<div class="swiper-slide"><img src="e5.JPG" alt="#"></div>
+ <div class="swiper-slide"><img src="l19.jpeg" alt="#"></div>
+<div class="swiper-slide"><img src="j11.JPG" alt="#"></div>
+           <div class="swiper-slide"><img src="j1.JPG" alt="#"></div>
+ <div class="swiper-slide"><img src="j7.JPG" alt="#"></div>
+      
+
+ <div class="swiper-slide"><img src="e7.JPG" alt="#"></div>
+<div class="swiper-slide"><img src="e5.JPG" alt="#"></div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
   <!-- Lindies' Elegant Hats -->
   <section>
-    <h2>Lindies' Handmade Masterpieces</h2>
-    <p class="description">Unleash your elegance with handmade Masterpieces ranging from crorcheted clothes of all sorts to handmade custom luxury design hats etc..</p>
+    <h2>Lindies' Elegant Hats</h2>
+    <p class="description">Unleash your elegance with our handpicked collection of luxurious, custom-designed hats perfect for all events and styles.</p>
     <div class="contact">
       <p>Call: <strong>0976 668808</strong> | Email: <a href="mailto:jungleshopping2024@gmail.com">jungleshopping2024@gmail.com</a></p>
     </div>
@@ -549,7 +669,7 @@
 
 
 
-      <button onclick="window.open('https://wa.me/260976668808', '_blank')">Custom Order</button>
+      <button onclick="window.open('https://wa.me/0976668808', '_blank')">Custom Order</button>
     </div>
   </section>
 <!-- View Collection Button -->
@@ -622,6 +742,33 @@
 </div>
 
 <script>
+  new Swiper('.swiper', {
+    loop: true,
+    autoplay: {
+      delay: 2500,
+    },
+    slidesPerView: 3,
+    centeredSlides: true,
+    spaceBetween: 30,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    grabCursor: true,
+    effect: 'coverflow',
+    coverflowEffect: {
+      rotate: 50,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows: false,
+    },
+  });
+</script>
+
+
+
+<script>
   const modal = document.getElementById("collectionModal");
   const btn = document.getElementById("viewCollectionBtn");
   const span = document.querySelector(".modal-close");
@@ -659,6 +806,7 @@ window.onclick = (event) => {
 };
 
 </script>
+
 
 </body>
 </html>
